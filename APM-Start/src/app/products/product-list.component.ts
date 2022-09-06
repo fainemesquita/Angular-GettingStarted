@@ -20,7 +20,10 @@ export class ProductListComponent{
   set listFilter(value: string){
     this._listFilter = value;
     console.log('in setter', value)
+    this.filteredProducts = this.performFilter(value);
   }
+
+  filteredProducts: IProduct[] = [];
 
   products: IProduct[] = [
     {
@@ -44,6 +47,12 @@ export class ProductListComponent{
       "imageUrl": "assets/images/garden_cart.png"
     }
   ];
+
+  performFilter(filteredBy: string): IProduct[] {
+    filteredBy = filteredBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) =>
+    product.productName.toLocaleLowerCase().includes(filteredBy))
+  }
 
   toggleImage(): void{
     this.showImage = !this.showImage;
