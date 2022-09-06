@@ -12,7 +12,16 @@ export class ProductListComponent{
   imageWidth = 50;
   imageMargin = 2;
   showImage = false;
-  listFilter = 'cart';
+
+  private _listFilter: string = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string){
+    this._listFilter = value;
+    console.log('in setter', value)
+  }
+
   products: IProduct[] = [
     {
       "productId": 1,
@@ -38,5 +47,9 @@ export class ProductListComponent{
 
   toggleImage(): void{
     this.showImage = !this.showImage;
+  }
+
+  ngOnInit(): void {
+    this.listFilter = 'cart'
   }
 }
